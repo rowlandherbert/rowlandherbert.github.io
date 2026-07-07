@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rowland Herbert-Faulkner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:    #0D0D0D;
+      --black-alt:#1A1A1A;
+      --text:     #F0EDE6;
+      --accent:   #C8B89A;
+      --mid:      #3D3530;
+      --muted:    #8A8078;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--mid);
+    }
+
+    nav .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2.5rem;
+    }
+
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+
+    nav ul a:hover { color: var(--accent); }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 6rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.2s;
+    }
+
+    .hero-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 1.12;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+
+    .hero-headline .word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: wordReveal 0.7s ease forwards;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 580px;
+      line-height: 1.8;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 2.2s;
+    }
+
+    .hero-cta {
+      margin-top: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 2.5s;
+    }
+
+    .hero-cta a {
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--mid);
+      padding-bottom: 0.25rem;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+
+    .hero-cta a:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+
+    @keyframes wordReveal {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-headline .word,
+      .hero-eyebrow,
+      .hero-sub,
+      .hero-cta { animation: none; opacity: 1; transform: none; }
+    }
+
+    /* ── Sections ── */
+    section {
+      padding: 7rem 3rem;
+    }
+
+    section:nth-of-type(even) {
+      background: var(--black-alt);
+    }
+
+    .section-inner {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3rem;
+      display: block;
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+
+    p {
+      color: #C8C4BE;
+      margin-bottom: 1.5rem;
+      max-width: 680px;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    em {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.08em;
+      color: var(--text);
+    }
+
+    /* ── Publications ── */
+    .pub-intro {
+      margin-bottom: 3.5rem;
+    }
+
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .pub-item {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.75rem;
+    }
+
+    .pub-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+
+    .pub-meta {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+    }
+
+    .pub-desc {
+      font-size: 0.95rem;
+      color: #A8A49E;
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+
+    .pub-link {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--mid);
+      padding-bottom: 0.1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .pub-link:hover { border-color: var(--accent); }
+
+    /* ── Contact form ── */
+    #collaborate .section-inner {
+      max-width: 620px;
+    }
+
+    .form-group {
+      margin-bottom: 1.75rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: var(--black-alt);
+      border: 1px solid var(--mid);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      padding: 0.85rem 1rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--accent);
+    }
+
+    textarea { min-height: 140px; resize: vertical; }
+
+    .submit-btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.9rem 2.5rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent);
+      color: var(--black);
+    }
+
+    /* ── About ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .about-credentials {
+      border-top: 1px solid var(--mid);
+      padding-top: 2rem;
+      margin-top: 2.5rem;
+    }
+
+    .credential-item {
+      margin-bottom: 1.25rem;
+    }
+
+    .credential-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .credential-value {
+      font-size: 0.92rem;
+      color: #C8C4BE;
+      line-height: 1.5;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--mid);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover { color: var(--accent); }
+
+    /* ── Divider ── */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 2.5rem 0;
+      opacity: 0.5;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1.25rem; }
+      #hero { padding: 7rem 1.5rem 4rem; }
+      section { padding: 5rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 0; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#hero" class="name">Rowland Herbert-Faulkner</a>
+    <ul>
+      <li><a href="#domain">Work</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#collaborate">Collaborate</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <div id="hero">
+    <p class="hero-eyebrow">Public Interest Technology · Urban Governance · Cybersecurity</p>
+    <h1 class="hero-headline" id="heroHeadline"></h1>
+    <p class="hero-sub">I help tech companies and local governments understand each other well enough to actually work together. With that understanding, they can avoid costly failures in partnership, administration, and adoption.</p>
+    <div class="hero-cta">
+      <a href="#collaborate">Start a conversation →</a>
+    </div>
+  </div>
+
+  <!-- Domain, Curiosity, Motivation -->
+  <section id="domain">
+    <div class="section-inner">
+      <span class="section-label">Domain · Curiosity · Motivation</span>
+      <h2>The gap between what technology promises cities and what cities can actually absorb</h2>
+      <div class="divider"></div>
+      <p><em>I remember being six years old, sitting in the backseat watching road construction out the window. Each trip was a chance to track what had changed, what was new, and what was taking shape. I knew those roads. But at six, everything still felt enormous and alive with possibility.</em></p>
+      <p><em>That early instinct is still alive within me: to pay attention to how pathways are built and how to navigate them, how people interact with the network, and what changes when the network changes.</em></p>
+      <p>Today I work at the intersection of urban infrastructure and digital governance. I study and navigate the systems that shape how cities evolve as advanced digital systems become the preferred infrastructure in urban areas — how we move, how we access opportunity, how we engage with one another, and who gets to participate in decisions about all of the above.</p>
+      <p>What drives me is a particular kind of curiosity: not just about what technology promises cities, but about what happens in the gap between the promise and the reality. That gap is where the most consequential questions about governance, equity, capacity, and trust live. It's also where I do my most useful work.</p>
+    </div>
+  </section>
+
+  <!-- My Approach -->
+  <section id="approach">
+    <div class="section-inner">
+      <span class="section-label">My Approach</span>
+      <h2>Genuine inquiry before prescription</h2>
+      <div class="divider"></div>
+      <p>Complex problems don't usually announce themselves cleanly. They arrive wrapped in competing priorities, social and institutional histories, and unexamined assumptions. The first task isn't solving the problem. It's understanding what the problem actually is, and priorities of the stakeholders involved.</p>
+      <p>My approach begins there: with inquiry before prescription. That means interviewing the people closest to the problem, analysis of the documents and data that reveal how decisions have actually been made, and the kind of sustained contemplation that notices patterns across seemingly isolated domains. I move between quantitative and qualitative methods depending on what the terrain demands, not out of methodological habit, but because different questions require different instruments.</p>
+      <p>What I'm ultimately doing is synthesis that provides direction. I'm looking for the connections between things that appear unrelated, the tensions that explain why a straightforward solution hasn't worked, and the pathways that become visible only when you're willing to treat complexity as an opportunity.</p>
+      <p>In practice, this means I'm often most useful at the moments other people find most difficult — when the vision is clear but the path isn't, when stakeholders are misaligned, when a technically sound solution keeps failing for reasons nobody can quite articulate. Those are navigational problems. Navigation is what I do.</p>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section id="publications">
+    <div class="section-inner">
+      <span class="section-label">Publications</span>
+      <h2>Research as applied intelligence</h2>
+      <div class="divider"></div>
+      <div class="pub-intro">
+        <p>The work below isn't research for its own sake. Each piece addresses a specific gap in how decision-makers understand the challenges cities face as they navigate the digital transformation. The question driving all of it: what do people in positions of authority actually need to know to make better decisions?</p>
+      </div>
+
+      <div class="pub-list">
+
+        <div class="pub-item">
+          <p class="pub-title">The Transaction Costs of Municipal Cyber Risk Management</p>
+          <p class="pub-meta">UC Berkeley Center for Long-Term Cybersecurity · 2024</p>
+          <p class="pub-desc">When cities invest in cybersecurity, the sticker price is rarely the real cost. This white paper exposes the hidden costs that derail municipal cyber risk management: the time and resources consumed by procurement, contracting, coordination, insurance negotiation, and compliance that rarely appear in budget projections but consistently produce cost overruns and administrative strain. For technology companies selling into the public sector, this research is a map of where deals go sideways and why cities often can't absorb what vendors are offering, even when the product is sound.</p>
+          <a href="https://cltc.berkeley.edu/publication/the-transaction-costs-of-municipal-cyber-risk-management/" target="_blank" class="pub-link">Read the white paper →</a>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Matching Technique with Authority: How Local DOTs Can Narrow the Gap Between Network Management Authority and Analytical Capacity</p>
+          <p class="pub-meta">UC Berkeley Institute of Transportation Studies · Policy Brief & Research Report · 2025</p>
+          <p class="pub-desc">Advanced traffic simulation tools can dramatically improve how cities manage mobility equitably — but only if the agencies responsible for traffic management have the capacity to use them. This research investigates the institutional gap between what the technology can do and what local departments of transportation are actually equipped to do with it. The practical implication: technology adoption in the public sector is as much a governance and capacity problem as it is a technical one. Companies that understand this build better partnerships and avoid costly failed deployments.</p>
+          <a href="https://ucits.org/projects/development-of-transportation-equity-metrics-to-be-tested-using-the-mobiliti-simulator/" target="_blank" class="pub-link">Read the research →</a>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">Smart City Governance and the Limits of Private Authority</p>
+          <p class="pub-meta">Dissertation Research · UC Berkeley · 2025</p>
+          <p class="pub-desc">When Alphabet's Sidewalk Labs attempted to develop a smart city testbed in Toronto, the project became a flashpoint for concerns about data governance and private sector overreach. Conventional analysis focused on public resistance. This research took a deeper look at why the project was structurally unable to succeed regardless of public sentiment. The finding: the Sidewalk Toronto partnership lacked genuine political authority from the outset, a deficiency produced in part by private sector attempts to accelerate business development by bypassing direct engagement with public agencies. For any company seeking to work with cities, this case study is a precise diagnosis of how that relationship can fail.</p>
+        </div>
+
+        <div class="pub-item">
+          <p class="pub-title">As Smart Cities Expand, So Do the Threats</p>
+          <p class="pub-meta">Dark Reading · Media Coverage · February 2024</p>
+          <p class="pub-desc">Featured in Dark Reading, one of the leading publications in cybersecurity, this piece draws on research into how the convergence of physical and digital systems in cities dramatically expands the attack surface that local governments must defend — often without the resources, frameworks, or institutional capacity to do so.</p>
+          <a href="https://www.darkreading.com/ics-ot-security/smart-city-ecosystems-face-cybersecurity-shortfall-as-urban-populations-grow" target="_blank" class="pub-link">Read the article →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Invitation to Collaborate -->
+  <section id="collaborate">
+    <div class="section-inner">
+      <span class="section-label">Invitation to Collaborate</span>
+      <h2>The most interesting work usually starts without a clear category</h2>
+      <div class="divider"></div>
+      <p>The problems worth solving at the intersection of technology and urban governance are rarely simple, and they're rarely solved alone.</p>
+      <p>If you're working on something that lives in that space — whether you're building products for the public sector, navigating a partnership with a city or regional agency, trying to understand why a technically sound initiative keeps hitting institutional walls, or looking for someone who can help translate between worlds that don't always speak the same language — I'd like to hear about it.</p>
+      <p>I'm open to roles, consulting engagements, research collaborations, and conversations that don't yet have a clear category.</p>
+      <p style="margin-bottom: 2.5rem;"><em>If something here resonates, reach out. I read everything.</em></p>
+
+      <form action="https://formspree.io/f/mojoppal" method="POST" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="What are you working on?" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send message</button>
+        <p id="form-confirm" style="display:none; margin-top:1.25rem; color: var(--accent); font-size:0.9rem;">Thank you — I'll be in touch.</p>
+      </form>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about">
+    <div class="section-inner">
+      <span class="section-label">About</span>
+      <h2>Rowland Awadagin Herbert-Faulkner, Ph.D.</h2>
+      <div class="divider"></div>
+      <p>I hold a Ph.D. in City and Regional Planning from UC Berkeley, with concentrations in transportation infrastructure, urban governance, and cybersecurity. My academic foundation began at MIT, where I studied Civil Engineering with a concentration in Urban Studies and Planning.</p>
+      <p>That combination — engineering and planning, infrastructure and governance, technical systems and the human institutions that manage them — has defined the arc of everything since.</p>
+      <p>Over the course of my doctoral work and beyond, I've been affiliated with UC Berkeley's Center for Long-Term Cybersecurity and the Institute of Transportation Studies. I've taught urban planning and transportation planning at the undergraduate and graduate levels, and I've presented research at venues the American Collegiate Schools of Planning annual conference and ITS California.</p>
+      <p>Before and alongside academia, I've worked inside the systems I study — as an analyst examining transportation economic impacts, as an intern with the San Francisco Municipal Transportation Agency, and as a researcher studying high-speed rail and regional transportation planning at MIT.</p>
+      <p>I am based in the San Francisco Bay Area.</p>
+
+      <div class="about-credentials">
+        <div class="credential-item">
+          <span class="credential-label">Education</span>
+          <span class="credential-value">Ph.D., City & Regional Planning — UC Berkeley<br/>Master of City Planning — UC Berkeley<br/>M.S., Transportation Engineering — UC Berkeley<br/>B.S., Civil Engineering — MIT</span>
+        </div>
+        <div class="credential-item">
+          <span class="credential-label">Fellowships & Recognition</span>
+          <span class="credential-value">Eno Center for Transportation Leadership Fellow · RSA Conference Scholar · FHWA Eisenhower Fellow (×2) · Outstanding GSI, UC Berkeley</span>
+        </div>
+        <div class="credential-item">
+          <span class="credential-label">Affiliations</span>
+          <span class="credential-value">UC Berkeley CLTC · UC Berkeley ITS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span class="footer-name">Rowland Herbert-Faulkner</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/daginfaulkner" target="_blank">LinkedIn</a>
+      <a href="mailto:dagin_faulkner@berkeley.edu">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    // Hero headline word-by-word reveal
+    const headline = "Navigating the digital transformation of cities.";
+    const words = headline.split(" ");
+    const el = document.getElementById("heroHeadline");
+    const baseDelay = 0.5;
+    const wordDelay = 0.18;
+
+    words.forEach((word, i) => {
+      const span = document.createElement("span");
+      span.className = "word";
+      span.textContent = word + "\u00A0";
+      span.style.animationDelay = `${baseDelay + i * wordDelay}s`;
+      el.appendChild(span);
+    });
+
+    // Simple form submission handler (for GitHub Pages — no backend)
+    function handleSubmit(e) {
+      e.preventDefault();
+      const confirm = document.getElementById("form-confirm");
+      confirm.style.display = "block";
+      e.target.reset();
+    }
+  </script>
+
+</body>
+</html>
