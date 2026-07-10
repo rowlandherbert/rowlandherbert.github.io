@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rowland Herbert-Faulkner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black:    #0D0D0D;
+      --black-alt:#1A1A1A;
+      --text:     #F0EDE6;
+      --accent:   #C8B89A;
+      --mid:      #3D3530;
+      --muted:    #8A8078;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 17px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 3rem;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--mid);
+    }
+    nav .name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      transition: color 0.3s ease;
+    }
+    nav ul a:hover { color: var(--accent); }
+    nav ul .cv-link {
+      color: var(--accent);
+      border: 1px solid var(--mid);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2px;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    nav ul .cv-link:hover {
+      background: var(--accent);
+      color: var(--black);
+      border-color: var(--accent);
+    }
+    #hero {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 6rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('hero.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.25;
+      z-index: 0;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 860px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.2s;
+    }
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+      font-size: 0.7em;
+      display: block;
+      letter-spacing: 0.04em;
+      margin-top: 0.1rem;
+    }
+    .hero-domains {
+      margin: 2rem 0;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.5s;
+    }
+    .hero-domains ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .hero-domains ul li {
+      font-size: 0.88rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .hero-domains ul li::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .hero-body {
+      max-width: 620px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.8s;
+    }
+    .hero-body p {
+      color: #C8C4BE;
+      margin-bottom: 1.25rem;
+      font-size: 1rem;
+    }
+    .hero-thesis {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.2rem !important;
+      color: var(--text) !important;
+      border-left: 2px solid var(--accent);
+      padding-left: 1.25rem;
+      margin-top: 1.75rem !important;
+    }
+    .hero-cta {
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 1.1s;
+    }
+    .hero-cta a {
+      display: inline-block;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--mid);
+      padding-bottom: 0.25rem;
+      transition: border-color 0.3s ease, color 0.3s ease;
+    }
+    .hero-cta a:hover { border-color: var(--accent); color: var(--text); }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-name, .hero-domains, .hero-body, .hero-cta {
+        animation: none; opacity: 1; transform: none;
+      }
+    }
+    section { padding: 7rem 3rem; }
+    section:nth-of-type(even) { background: var(--black-alt); }
+    .section-inner { max-width: 780px; margin: 0 auto; }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 3rem;
+      display: block;
+    }
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    p {
+      color: #C8C4BE;
+      margin-bottom: 1.5rem;
+      max-width: 680px;
+    }
+    p:last-child { margin-bottom: 0; }
+    em {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.08em;
+      color: var(--text);
+    }
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 2.5rem 0;
+      opacity: 0.5;
+    }
+    .section-image {
+      width: 100%;
+      max-height: 340px;
+      object-fit: cover;
+      object-position: center;
+      margin-bottom: 3rem;
+      opacity: 0.75;
+    }
+    .pub-intro { margin-bottom: 3.5rem; }
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 3.5rem;
+    }
+    .pub-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+    .pub-item-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.8;
+    }
+    .pub-content {
+      border-left: 2px solid var(--accent);
+      padding-left: 1.75rem;
+    }
+    .pub-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 0.25rem;
+      line-height: 1.3;
+    }
+    .pub-meta {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 0.85rem;
+    }
+    .pub-desc {
+      font-size: 0.95rem;
+      color: #A8A49E;
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+      max-width: 100%;
+    }
+    .pub-link {
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--mid);
+      padding-bottom: 0.1rem;
+      transition: border-color 0.3s ease;
+    }
+    .pub-link:hover { border-color: var(--accent); }
+    #collaborate .section-inner { max-width: 620px; }
+    .form-group { margin-bottom: 1.75rem; }
+    label {
+      display: block;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+    }
+    input, textarea {
+      width: 100%;
+      background: var(--black-alt);
+      border: 1px solid var(--mid);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 300;
+      padding: 0.85rem 1rem;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    input:focus, textarea:focus { border-color: var(--accent); }
+    textarea { min-height: 140px; resize: vertical; }
+    .submit-btn {
+      display: inline-block;
+      margin-top: 0.5rem;
+      padding: 0.9rem 2.5rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .submit-btn:hover { background: var(--accent); color: var(--black); }
+    .about-portrait {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      object-position: center top;
+      border-radius: 50%;
+      border: 2px solid var(--mid);
+      float: right;
+      margin: 0 0 2rem 2.5rem;
+    }
+    .about-credentials {
+      border-top: 1px solid var(--mid);
+      padding-top: 2rem;
+      margin-top: 2.5rem;
+      clear: both;
+    }
+    .credential-item { margin-bottom: 1.25rem; }
+    .credential-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .credential-value {
+      font-size: 0.92rem;
+      color: #C8C4BE;
+      line-height: 1.5;
+    }
+    .cv-download {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: 0.85rem 2rem;
+      background: transparent;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .cv-download:hover { background: var(--accent); color: var(--black); }
+    footer {
+      background: var(--black);
+      border-top: 1px solid var(--mid);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.95rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .footer-links { display: flex; gap: 2rem; }
+    .footer-links a {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { gap: 1rem; }
+      nav ul .cv-link { display: none; }
+      #hero { padding: 7rem 1.5rem 4rem; }
+      section { padding: 5rem 1.5rem; }
+      .pub-item { grid-template-columns: 1fr; }
+      .about-portrait { float: none; margin: 0 0 2rem 0; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#hero" class="name">Rowland Herbert-Faulkner</a>
+    <ul>
+      <li><a href="#brief">In Brief</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#collaborate">Collaborate</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="CV_Herbert-Faulkner_2026-07.pdf" target="_blank" class="cv-link">CV</a></li>
+    </ul>
+  </nav>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-inner">
+      <h1 class="hero-name">
+        I'm Dagin.
+        <em>[DA-jin]</em>
+      </h1>
+      <div class="hero-domains">
+        <ul>
+          <li>Public interest technology</li>
+          <li>Local government capacity building</li>
+          <li>Transportation planning and engineering</li>
+          <li>Municipal cyber risk management</li>
+        </ul>
+      </div>
+      <div class="hero-body">
+        <p>I've published research on digital infrastructure governance, practiced transportation planning in the public and private sectors, and partnered with community organizations to direct environmental justice research and policy development.</p>
+        <p>That range — across research, public agencies, private firms, and nonprofits — is what allows me to direct, strategize, and advise on multistakeholder governance challenges, particularly around technology adoption and deployment.</p>
+        <p class="hero-thesis">For me, it all comes together under one idea: helping local governments build the capacity to adapt to the ongoing digital transformation.</p>
+      </div>
+      <div class="hero-cta">
+        <a href="#publications">See the work →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="brief">
+    <div class="section-inner">
+      <span class="section-label">In Brief</span>
+      <img src="approach.jpg" alt="Urban infrastructure" class="section-image" />
+      <h2>Finding the pathways that complexity obscures</h2>
+      <div class="divider"></div>
+      <p>What I'm ultimately doing is synthesis. I'm looking for the connections between things that appear unrelated, the tensions that explain why a straightforward solution hasn't worked, and the pathways that become visible only when you're willing to sit with complexity long enough for it to yield something.</p>
+      <p>In practice, this means I'm often most useful at the moments other people find most difficult — when the vision is clear but the path isn't, when stakeholders are misaligned, when a technically sound solution keeps failing for reasons nobody can quite articulate. Those are navigational problems. Navigation is what I do.</p>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="section-inner">
+      <span class="section-label">Publications</span>
+      <h2>Research as applied intelligence</h2>
+      <div class="divider"></div>
+      <div class="pub-intro">
+        <p>The work below isn't research for its own sake. Each piece addresses a specific gap in how decision-makers understand the challenges cities face as they navigate the digital transformation. The question driving all of it: what do people in positions of authority actually need to know to make better decisions?</p>
+      </div>
+      <div class="pub-list">
+
+        <div class="pub-item">
+          <img src="pub-cyber.jpg" alt="Municipal cybersecurity" class="pub-item-image" />
+          <div class="pub-content">
+            <p class="pub-title">The Transaction Costs of Municipal Cyber Risk Management</p>
+            <p class="pub-meta">UC Berkeley Center for Long-Term Cybersecurity · 2024</p>
+            <p class="pub-desc">When cities invest in cybersecurity, the sticker price is rarely the real price. This white paper surfaces the hidden costs that derail municipal cyber risk management — procurement, contracting, coordination, insurance negotiation, and compliance — that rarely appear in budget projections but consistently produce cost overruns and administrative strain. For technology companies selling into the public sector, this research is a map of where deals go sideways and why cities often can't absorb what vendors are offering, even when the product is sound.</p>
+            <a href="https://cltc.berkeley.edu/publication/the-transaction-costs-of-municipal-cyber-risk-management/" target="_blank" class="pub-link">Read the white paper →</a>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <img src="pub-traffic.png" alt="Traffic network analysis" class="pub-item-image" />
+          <div class="pub-content">
+            <p class="pub-title">Matching Technique with Authority: How Local DOTs Can Narrow the Gap Between Network Management Authority and Analytical Capacity</p>
+            <p class="pub-meta">UC Berkeley Institute of Transportation Studies · Policy Brief & Research Report · 2025</p>
+            <p class="pub-desc">Advanced traffic simulation tools can dramatically improve how cities manage mobility equitably — but only if the agencies responsible for traffic management have the capacity to use them. This research investigates the institutional gap between what the technology can do and what local departments of transportation are actually equipped to do with it. The practical implication: technology adoption in the public sector is as much a governance and capacity problem as it is a technical one.</p>
+            <a href="https://ucits.org/projects/development-of-transportation-equity-metrics-to-be-tested-using-the-mobiliti-simulator/" target="_blank" class="pub-link">Read the research →</a>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <img src="pub-quayside.jpg" alt="Smart city development" class="pub-item-image" />
+          <div class="pub-content">
+            <p class="pub-title">Smart City Governance and the Limits of Private Authority</p>
+            <p class="pub-meta">Dissertation Research · UC Berkeley · 2025</p>
+            <p class="pub-desc">When Alphabet's Sidewalk Labs attempted to develop a smart city testbed in Toronto, the project became a flashpoint for concerns about data governance and private sector overreach. Conventional analysis focused on public resistance. This research looked deeper — at why the project was structurally unable to succeed regardless of public sentiment. The finding: the Sidewalk Toronto partnership lacked genuine political authority from the outset, produced in part by private sector attempts to accelerate business development by bypassing direct engagement with public agencies.</p>
+          </div>
+        </div>
+
+        <div class="pub-item">
+          <img src="pub-threats.jpg" alt="Smart city cybersecurity" class="pub-item-image" />
+          <div class="pub-content">
+            <p class="pub-title">As Smart Cities Expand, So Do the Threats</p>
+            <p class="pub-meta">Dark Reading · February 2024</p>
+            <p class="pub-desc">Featured in one of cybersecurity's leading trade publications, this piece draws on original research into how the convergence of physical and digital systems in cities expands the attack surface that local governments must defend — often without the resources, frameworks, or institutional capacity to do so.</p>
+            <a href="https://www.darkreading.com/ics-ot-security/smart-city-ecosystems-face-cybersecurity-shortfall-as-urban-populations-grow" target="_blank" class="pub-link">Read the article →</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="collaborate">
+    <div class="section-inner">
+      <span class="section-label">Invitation to Collaborate</span>
+      <img src="collaborate.jpg" alt="Urban light" class="section-image" />
+      <h2>The most interesting work usually starts without a clear category</h2>
+      <div class="divider"></div>
+      <p>The problems worth solving at the intersection of technology and urban governance are rarely simple, and they're rarely solved alone.</p>
+      <p>If you're working on something that lives in that space — whether you're building products for the public sector, navigating a partnership with a city or regional agency, trying to understand why a technically sound initiative keeps hitting institutional walls, or looking for someone who can help translate between worlds that don't always speak the same language — I'd like to hear about it.</p>
+      <p>I'm open to roles, consulting engagements, research collaborations, and conversations that don't yet have a clear category.</p>
+      <p style="margin-bottom: 2.5rem;"><em>If something here resonates, reach out. I read everything.</em></p>
+      <form action="https://formspree.io/f/mojoppal" method="POST" onsubmit="handleSubmit(event)">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="What are you working on?" required></textarea>
+        </div>
+        <button type="submit" class="submit-btn">Send message</button>
+        <p id="form-confirm" style="display:none; margin-top:1.25rem; color: var(--accent); font-size:0.9rem;">Thank you — I'll be in touch.</p>
+      </form>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="section-inner">
+      <span class="section-label">About</span>
+      <h2>Rowland Awadagin Herbert-Faulkner, Ph.D.</h2>
+      <div class="divider"></div>
+      <img src="about-portrait.jpg" alt="Rowland Herbert-Faulkner" class="about-portrait" />
+      <p>I hold a Ph.D. in City and Regional Planning from UC Berkeley, with concentrations in transportation infrastructure, urban governance, and cybersecurity. My academic foundation began at MIT, where I studied Civil Engineering with a concentration in Urban Studies and Planning.</p>
+      <p>That combination — engineering and planning, infrastructure and governance, technical systems and the human institutions that manage them — has defined the arc of everything since.</p>
+      <p>Over the course of my doctoral work and beyond, I've been affiliated with UC Berkeley's Center for Long-Term Cybersecurity, the Institute of Transportation Studies, and the Just Cities Institute. I've taught urban transportation and planning at the undergraduate and graduate levels, and I've presented research at venues including the RSA Conference, the American Collegiate Schools of Planning, and the Transportation Research Board.</p>
+      <p>Before and alongside academia, I've worked inside the systems I study — as an analyst examining transportation economic impacts, as an intern with the San Francisco Municipal Transportation Agency, and as a researcher studying high-speed rail and regional transportation planning at MIT.</p>
+      <div class="divider"></div>
+      <p><em>Photography has been an important practice for me — not just as a creative outlet, but as a discipline of visual documentation. Creating a reference archive through the act of recording constantly evolving urban landscapes has trained me to explore the layered context in which past and present visions are developed and realized.</em></p>
+      <p><em>I grew up in Dallas. I remember being six years old, sitting in the backseat watching road construction out the window. Each trip was a chance to track what had changed, what was new, and what was taking shape. I knew those roads. But at six, everything still felt enormous and alive with possibility. I soon learned that others shared my enthusiasm for tracking change over time — through photography.</em></p>
+      <p><em>Technology often promises novelty. But it's deployed in a deeply storied landscape of relationships and past ambitions that surface each time a new initiative gains traction. Photography taught me to see that landscape before I had the language to describe it.</em></p>
+      <p>I am based in the San Francisco Bay Area.</p>
+      <a href="CV_Herbert-Faulkner_2026-07.pdf" target="_blank" class="cv-download">Download CV →</a>
+      <div class="about-credentials">
+        <div class="credential-item">
+          <span class="credential-label">Education</span>
+          <span class="credential-value">Ph.D., City & Regional Planning — UC Berkeley<br/>M.C.P., City Planning — UC Berkeley<br/>M.S., Transportation Engineering — UC Berkeley<br/>B.S., Civil Engineering — MIT</span>
+        </div>
+        <div class="credential-item">
+          <span class="credential-label">Fellowships & Recognition</span>
+          <span class="credential-value">Eno Center for Transportation Leadership Fellow · RSA Conference Scholar · FHWA Eisenhower Fellow (×2) · Outstanding GSI, UC Berkeley</span>
+        </div>
+        <div class="credential-item">
+          <span class="credential-label">Affiliations</span>
+          <span class="credential-value">UC Berkeley CLTC · UC Berkeley ITS · Just Cities Institute</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-name">Rowland Herbert-Faulkner</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/daginfaulkner" target="_blank">LinkedIn</a>
+      <a href="CV_Herbert-Faulkner_2026-07.pdf" target="_blank">CV</a>
+      <a href="mailto:dagin_faulkner@berkeley.edu">Email</a>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = new FormData(form);
+      fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(response => {
+        if (response.ok) {
+          document.getElementById("form-confirm").style.display = "block";
+          form.reset();
+        }
+      });
+    }
+  </script>
+
+</body>
+</html>
