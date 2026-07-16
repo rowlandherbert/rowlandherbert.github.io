@@ -153,16 +153,22 @@
       flex-wrap: wrap;
       justify-content: center;
       row-gap: 0.6rem;
-      column-gap: 2.25rem;
+      column-gap: 0.5rem;
       max-width: 1000px;
       margin: 0 auto;
     }
     .top-banner ul li {
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.02em;
+      text-transform: none;
       color: var(--muted);
       white-space: nowrap;
+    }
+    .top-banner ul li:not(:last-child)::after {
+      content: '·';
+      margin-left: 1.1rem;
+      color: rgba(200, 184, 154, 0.4);
+    }
     }
     .hero-domains {
       margin: 2rem 0;
@@ -505,6 +511,7 @@
       nav ul .cv-link { display: none; }
       .top-banner { padding: 5rem 1.5rem 1.25rem; }
       .top-banner ul { justify-content: flex-start; flex-direction: column; row-gap: 0.65rem; }
+      .top-banner ul li::after { content: none; }
       .top-banner ul li { white-space: normal; }
       #hero { padding: 2rem 1.5rem 4rem; }
       .hero-inner { display: flex; flex-direction: column; }
