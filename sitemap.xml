@@ -11,6 +11,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://daginfaulkner.com/goal-led-approach.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://daginfaulkner.com/blog.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
