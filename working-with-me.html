@@ -31,6 +31,8 @@
 
   <nav>
     <a href="index.html" class="name">Dagin Faulkner, Ph.D.</a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle-input" />
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle menu"><span></span><span></span><span></span></label>
     <ul>
       <li><a href="index.html#publications">My Work</a></li>
       <li><a href="goal-led-approach.html">Approach</a></li>
@@ -70,5 +72,10 @@
     </div>
   </footer>
 
+  <script>
+    document.querySelectorAll('nav ul a').forEach(function (a) {
+      a.addEventListener('click', function () { document.getElementById('nav-toggle').checked = false; });
+    });
+  </script>
 </body>
 </html>
