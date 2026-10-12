@@ -676,6 +676,24 @@
       transition: border-color 0.3s ease;
     }
     .back-link:hover { border-color: var(--accent); }
+    .hero-mantra {
+      margin: 1.5rem 0;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards;
+      animation-delay: 0.65s;
+    }
+    .hero-mantra p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.5rem !important;
+      color: var(--accent) !important;
+      line-height: 1.4;
+      margin-bottom: 0.4rem !important;
+      max-width: none;
+    }
+    .hero-mantra p:last-child {
+      margin-bottom: 0 !important;
+    }
     .diagram-wide {
       max-width: 1300px;
       margin: 0 auto;
